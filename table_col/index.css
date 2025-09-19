@@ -1,7 +1,29 @@
 table, thead, tr, td, th{
-    border: 1px solid black;
+    border: 1px solid red;
     border-collapse: collapse;
 }
-.center{
-    text-align: center;
+
+table thead th{
+    background-color: aqua;
+}
+table tbody > tr{
+    background-color: blue;
+}
+
+table thead~tbody>tr{
+    background-color: brown;
+}
+
+tbody tr:nth-child(2n){
+    background-color: blueviolet;
+}
+
+tbody tr:hover{
+    background-color: green;
+    border: 10px;
+    color: deepskyblue;
+    font-style: italic;
+}
+table{
+    margin: auto;
 }
