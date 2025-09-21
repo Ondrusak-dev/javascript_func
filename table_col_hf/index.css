@@ -1,0 +1,14 @@
+table, th, td{
+    border: 2px dotted green ;
+    border-collapse: collapse;
+}
+table tbody > tr{
+    background-color: yellow;
+}
+tbody tr:nth-child(odd){
+    background-color: lightblue;
+}
+tbody tr:hover{
+    color: red;
+    font-weight: bold;
+}
