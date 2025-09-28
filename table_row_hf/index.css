@@ -1,0 +1,31 @@
+table, thead, tbody, tr, th, td{
+    border: 1px solid red;
+    border-collapse: collapse;
+}
+
+tr td:first-child{
+    background-color: blue;
+}
+
+tr td:last-child{
+    background-color: green;
+}
+
+tr:has(td):hover td {
+    font-weight: bold;
+    color: red;
+    background-color: yellow;
+}
+
+tr:has(td):hover td:first-child{
+    background-color: purple;
+    color: black;
+    font-weight: bold;
+}
+
+tr:has(td):hover td:last-child{
+    background-color: orange;
+    color: black;
+    font-weight: bold;
+}
+
