@@ -2,30 +2,36 @@ table, thead, tbody, tr, th, td{
     border: 1px solid red;
     border-collapse: collapse;
 }
-
-tr td:first-child{
+ 
+tr td:last-child{
     background-color: blue;
 }
-
-tr td:last-child{
-    background-color: green;
+tr td:nth-last-child(3){
+    background-color: blue;
 }
-
+ 
+/* tr td:nth-last-child(2){
+    background-color: blue;
+} */
+ 
 tr:has(td):hover td {
     font-weight: bold;
     color: red;
     background-color: yellow;
 }
-
+ 
 tr:has(td):hover td:first-child{
-    background-color: purple;
+    background-color: blue;
     color: black;
     font-weight: bold;
 }
-
+ 
 tr:has(td):hover td:last-child{
-    background-color: orange;
+    background-color: blue;
     color: black;
     font-weight: bold;
 }
-
+ 
+tr:has(td[rowspan]):has(+tr:hover) td{
+    background-color: blue;
+}
