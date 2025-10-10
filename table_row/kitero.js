@@ -16,3 +16,4 @@ if(obj.age == null){
 if(obj.age === null){
     console.log("hammis")
 }
+
