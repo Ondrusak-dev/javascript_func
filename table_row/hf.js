@@ -68,13 +68,12 @@ for(let a of arr){
     tr1.appendChild(td2)
     td2.innerText = a.mu;
 
-    if(a.nemzetiseg != undefined){
+    if(a.nemzetiseg = undefined){
         const tr1 = document.createElement("tr")
         tbody.appendChild(tr1)
 
         const td3 = document.createElement("td")
         tr1.appendChild(td3)
-        td3.innerText = a.nemzetiseg
         
         td.rowSpan = 2
     }
