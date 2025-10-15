@@ -1,83 +1,81 @@
 /**
- * @type {{nemzetiseg:?, szerzo:string, mu:string[]}}
+ * @type {{nemzetiseg:string, szerzo:string, mu1:string, szerzo2?:string, mu2?:string}[]}
  */
+
 const arr = [
     {
         nemzetiseg: 'Orosz',
         szerzo: 'Gogol',
-        mu: 'A köpönyeg'
-    },
-    {
-        szerzo: 'Csehov',
-        mu: 'A csinovnyik halála'
+        mu1: 'A köpönyeg',
+        szerzo2: 'Csehov',
+        mu2: 'A csinovnyik halála'
     },
     {
         nemzetiseg: 'Cseh',
         szerzo: 'Franz Kafka',
-        mu: 'Az átváltozás'
+        mu1: 'Az átváltozás'
     },
     {
         nemzetiseg: 'Magyar',
         szerzo: 'Örkény István',
-        mu: 'Egyperces novellák'
+        mu1: 'Egyperces novellák',
+        szerzo2: 'József Attila',
+        mu2: 'Klárisok'
     },
     {
-        szerzo: 'József Attila',
-        mu: 'Klárisok'
-    },
-    {
-        nemzetiseg: 'Svájc',
+        nationality: 'Svájc',
         szerzo: 'Friedrich Dürrenmatt',
-        mu: 'A fizikusok'
-    }
-];
+        mu1: 'A fizikusok'
+    },
+]
 
-const table = document.createElement("table")
-document.body.appendChild(table)
+const table = document.createElement('table');
+document.body.appendChild(table);
 
-const thead = document.createElement("thead")
-table.appendChild(thead)
+const thead = document.createElement('thead');
+table.appendChild(thead);
 
-const tr = document.createElement("tr")
-thead.appendChild(tr)
+const tr1 = document.createElement('tr');
+thead.appendChild(tr1);
 
-const t = ["Nemzetiség", "Szerző", "Mű" ]
-
-for (let a of t){
-    const th = document.createElement("th")
-    tr.appendChild(th)
+const t = ["Nemzetiség", "Szerző", "Mű"];
+for(let a of t) {
+    const th = document.createElement('th');
+    tr1.appendChild(th);
     th.innerText = a;
 }
 
-const tbody = document.createElement("tbody")
-table.appendChild(tbody)
+const tbody = document.createElement('tbody');
+table.appendChild(tbody);
 
-for(let a of arr){
-    const tr1 = document.createElement("tr")
-    tbody.appendChild(tr1)
-    
-    const td = document.createElement("td")
-    tr1.appendChild(td)
-    td.innerText = a.nemzetiseg;
+for (let a of arr) {
+    const tr2 = document.createElement('tr');
+    tbody.appendChild(tr2);
 
-    const td1 = document.createElement("td")
-    tr1.appendChild(td1)
-    td1.innerText = a.szerzo;
+    const td1 = document.createElement('td');
+    tr2.appendChild(td1);
+    td1.innerText = a.nemzetiseg;
 
-    const td2 = document.createElement("td")
-    tr1.appendChild(td2)
-    td2.innerText = a.mu;
+    const td2 = document.createElement('td');
+    tr2.appendChild(td2);
+    td2.innerText = a.szerzo;
 
-    if(a.nemzetiseg = undefined){
-        const tr1 = document.createElement("tr")
-        tbody.appendChild(tr1)
+    const td3 = document.createElement('td');
+    tr2.appendChild(td3);
+    td3.innerText = a.mu1;
 
-        const td3 = document.createElement("td")
-        tr1.appendChild(td3)
-        
-        td.rowSpan = 2
+    if (a.mu2 != undefined && a.szerzo2 != undefined) {
+        const tr3 = document.createElement('tr');
+        tbody.appendChild(tr3);
+
+        const td4 = document.createElement('td');
+        tr3.appendChild(td4);
+        td4.innerText = a.szerzo2;
+
+        const td5 = document.createElement('td');
+        tr3.appendChild(td5);
+        td5.innerText = a.mu2;
+
+        td1.rowSpan = 2;
     }
 }
-
-
-
