@@ -78,3 +78,20 @@ for (const element of arr) {
         row.appendChild(tdScientist2);
     }
 }
+/**
+ * 
+ * @param {string} celltype 
+ * @param {string} cellcontent 
+ * @param {HTMLTableRowElement} cellrow 
+ */
+function createCellElement(celltype, cellcontent, cellrow){
+    const a = document.createElement(celltype)
+    a.innerText=cellcontent
+    cellrow.appendChild(a)
+
+    
+
+
+
+
+}
