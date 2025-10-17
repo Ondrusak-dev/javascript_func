@@ -79,7 +79,7 @@ for(let a of arr){
         tr1.appendChild(td1)
         td1.innerText = a.team2Size;
 
-        td.rowSpan = 2 
+        td.rowSpan = 2
     }
 }
 
