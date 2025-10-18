@@ -36,18 +36,25 @@ table.appendChild(thead);
 const tr = document.createElement('tr');
 thead.appendChild(tr);
 
-const th1 = document.createElement('th');
-th1.innerText = 'Fizika területe';
-tr.appendChild(th1);
+createCellElement('th', 'Fizika területe', tr)
 
-const th2 = document.createElement('th');
-th2.innerText = 'Időszak';
-tr.appendChild(th2);
+// const th1 = document.createElement('th');
+// th1.innerText = 'Fizika területe';
+// tr.appendChild(th1);
 
-const th3 = document.createElement('th');
-th3.colSpan = 2;
-th3.innerText = 'Képviselők';
-tr.appendChild(th3);
+createCellElement('th', 'Időszak', tr)
+
+// const th2 = document.createElement('th');
+// th2.innerText = 'Időszak';
+// tr.appendChild(th2);
+
+const cell = createCellElement('th', 'Képviselők', tr)
+cell.colSpan= 2
+
+// const th3 = document.createElement('th');
+// th3.colSpan = 2;
+// th3.innerText = 'Képviselők';
+// tr.appendChild(th3);
 
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
@@ -56,26 +63,32 @@ for (const element of arr) {
     const row = document.createElement('tr');
     tbody.appendChild(row);
 
-    const td = document.createElement('td');
-    td.innerText = element.theme;
-    row.appendChild(td);
+    createCellElement('td', element.theme, row)
+    // const td = document.createElement('td');
+    // td.innerText = element.theme;
+    // row.appendChild(td);
 
-    const tdt = document.createElement('td');
-    tdt.innerText = element.time;
-    row.appendChild(tdt);
+    createCellElement('td', element.time, row)
+    // const tdt = document.createElement('td');
+    // tdt.innerText = element.time;
+    // row.appendChild(tdt);
 
-    const tdScientist1 = document.createElement('td');
-    tdScientist1.innerText = element.scientist1;
+
+    const cell = createCellElement('td', element.scientist1, row)
+
+
+    // const tdScientist1 = document.createElement('td');
+    // tdScientist1.innerText = element.scientist1;
+    // row.appendChild(tdScientist1);
 
     if (element.scientist2 === undefined) {
-        tdScientist1.colSpan = 2;
-        row.appendChild(tdScientist1);
+        cell.colSpan = 2;
     } else {
-        row.appendChild(tdScientist1);
+        // const tdScientist2 = document.createElement('td');
+        // tdScientist2.innerText = element.scientist2;
+        // row.appendChild(tdScientist2);
 
-        const tdScientist2 = document.createElement('td');
-        tdScientist2.innerText = element.scientist2;
-        row.appendChild(tdScientist2);
+        createCellElement('td', element.scientist2, row)
     }
 }
 /**
@@ -83,15 +96,13 @@ for (const element of arr) {
  * @param {string} celltype 
  * @param {string} cellcontent 
  * @param {HTMLTableRowElement} cellrow 
+ * @returns {HTMLTableCellElement}
  */
 function createCellElement(celltype, cellcontent, cellrow){
     const a = document.createElement(celltype)
     a.innerText=cellcontent
     cellrow.appendChild(a)
-
-    
-
-
-
+    return a;
 
 }
+
