@@ -63,7 +63,9 @@ for (const element of arr) {
     const row = document.createElement('tr');
     tbody.appendChild(row);
 
+    
     createCellElement('td', element.theme, row)
+
     // const td = document.createElement('td');
     // td.innerText = element.theme;
     // row.appendChild(td);

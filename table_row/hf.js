@@ -55,6 +55,13 @@ for (let a of arr) {
     const td1 = document.createElement('td');
     tr2.appendChild(td1);
     td1.innerText = a.nemzetiseg;
+    td1.addEventListener('click', function(e){
+    /**
+     * @type {HTMLTableCellElemet}
+     */
+       const a = e.target;
+       a.classList.add('marked');
+    });
 
     const td2 = document.createElement('td');
     tr2.appendChild(td2);
@@ -79,3 +86,4 @@ for (let a of arr) {
         td1.rowSpan = 2;
     }
 }
+
