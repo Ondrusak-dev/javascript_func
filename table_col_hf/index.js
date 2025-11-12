@@ -36,7 +36,11 @@ table.appendChild(thead)
 const tr = document.createElement('tr');
 thead.appendChild(tr)
 
+<<<<<<< HEAD
 const t = ["Fizika területe", "Időszak"]
+=======
+const t = ['Fizika területe','Időszak']
+>>>>>>> dff087c581d3a5502484096c25b175bd8f69521f
 
 for(let a of t){
     const th = document.createElement('th');
@@ -57,6 +61,7 @@ for(const a of arr){
     tbody.appendChild(tr)
 
     const td = document.createElement('td');
+<<<<<<< HEAD
     tr.appendChild(td)
     td.innerText=a.theme
 
@@ -81,6 +86,19 @@ for(const a of arr){
 
 
 
+=======
+    td.innerText=element.theme
+    tbody.appendChild(td)
+
+    const td2 = document.createElement('td');
+    td2.innerText=element.time
+    tbody.appendChild(td2)
+
+    const td3 = document.createElement('td');
+    th3.colSpan="2"
+    td3.innerText=element.scientist1
+    tbody.appendChild(td3)
+>>>>>>> dff087c581d3a5502484096c25b175bd8f69521f
 }
 
 

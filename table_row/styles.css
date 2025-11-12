@@ -44,3 +44,7 @@ tr:has(:not([rowspan])):has(+tr:hover)+ tr td{
     background-color: purple;
 }
 
+.marked{
+    color: red;
+}
+
