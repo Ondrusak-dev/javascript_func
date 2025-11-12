@@ -1,4 +1,4 @@
-table, thead, tr, td, th{
+table, td, th{
     border: 1px solid red;
     border-collapse: collapse;
 }
@@ -14,7 +14,7 @@ table thead~tbody>tr{
     background-color: brown;
 }
 
-tbody tr:nth-child(2n){
+tbody tr:nth-child(even){
     background-color: blueviolet;
 }
 
