@@ -23,6 +23,9 @@ function renderTableBodyHF(data) {
  * @param {string} labelcontent 
  */
 function createFormElement(form, id, labelcontent){
+    const div = document.createElement('div')
+    form.appendChild(div)
+
     const label = document.createElement('label')
     label.htmlFor = id;
     label.innerText = labelcontent;
@@ -30,8 +33,11 @@ function createFormElement(form, id, labelcontent){
     const input = document.createElement('input')
     input.id = id;
 
-    form.appendChild(label)
-    form.appendChild(input)
+    const span = document.createElement('span')
+    div.appendChild(span)
+
+    div.appendChild(label)
+    div.appendChild(input)
 }
 
 
@@ -203,3 +209,12 @@ function htmlformEventlistener(e){
             td1.rowSpan = 2;
         }
 }
+
+
+function validateFields(inputfield1, inputfield2, inputfield3){
+    let valid = true;
+
+    if(inputfield1.value == ""){
+        
+    }
+} 

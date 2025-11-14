@@ -117,6 +117,7 @@ formHF.addEventListener('submit', function(e) {
     e.preventDefault();
 
     const f = e.target;
+    
 
     /**
      * @type {{CountryWriters}}
