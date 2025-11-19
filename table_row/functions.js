@@ -1,107 +1,130 @@
 /**
  * @typedef {{nemzetiseg:string, szerzo:string, mu1:string, szerzo2?:string, mu2?:string}} CountryWriters
  */
+/**
+ * @typedef {{id:string, label:string}} FormField
+ */
 
 /**
- * @param {{CountryWriters}[]} data 
+ * @param {{nemzetiseg:string, szerzo:string, mu1:string, szerzo2?:string, mu2?:string}[]} tomb 
  */
-function renderTableBodyHF(data) {
-    const tablebody = document.getElementById('tbody_hf');
-    tablebody.innerHTML = '';
+function renderTableBody(tomb) {
+    const tbodyLocal = document.getElementById('tablebody');
+    tbodyLocal.innerHTML = "";
 
-    for (const  elem of data) {
-        renderTableRow(tablebody, elem)
+    for (let a of tomb) {
+        renderTableRow(tbodyLocal, a);
     }
 }
 
 
-
 /**
- * 
  * @param {string} form 
  * @param {string} id 
- * @param {string} labelcontent 
+ * @param {string} labelContent 
  */
-function createFormElement(form, id, labelcontent){
-    const div = document.createElement('div')
-    form.appendChild(div)
+function createFormElement(form, id, labelContent) {
+    const br1 = document.createElement('br');
+    const br2 = document.createElement('br');
+    const br3 = document.createElement('br');
 
-    const label = document.createElement('label')
+    const div = document.createElement('div');
+    form.appendChild(div);
+
+    const label = document.createElement('label');
     label.htmlFor = id;
-    label.innerText = labelcontent;
+    label.innerText = labelContent;
 
-    const input = document.createElement('input')
+    const input = document.createElement('input');
     input.id = id;
 
-    const span = document.createElement('span')
-    div.appendChild(span)
+    const span = document.createElement('span');
+    span.classList.add("error");
 
-    div.appendChild(label)
-    div.appendChild(input)
+    div.appendChild(label);
+    div.appendChild(br1);
+    div.appendChild(input);
+    div.appendChild(span);
+    div.appendChild(br2);
+    div.appendChild(br3);
 }
 
 
 /**
- * @param {HTMLTableSectionElement} tablebody 
+ * @param {HTMLTableSectionElement} tableBody 
  * @param {CountryWriters} CountryWriters 
  */
 
-function renderTableRow(tablebody, CountryWriters){
-    const tr = document.createElement('tr');
-        tablebody.appendChild(tr);
+function renderTableRow(tableBody, CountryWriters) {
+    const tr2 = document.createElement('tr');
+    tableBody.appendChild(tr2);
 
-        const td1 = createCell('td', CountryWriters.nemzetiseg, tr)
+    const td1 = createCell('td', CountryWriters.nemzetiseg, tr2);
+    
+    td1.addEventListener('click', function(e){
+        /**
+         * @type {HTMLTableCellElement}
+         */
+        const a = e.target;
 
-        td1.addEventListener('click', function(e) {
-            const cell = e.target;
-            const body = cell.parentElement.parentElement;
-            const prev = body.querySelector('.marked');
-            if (prev) prev.classList.remove('marked');
-            cell.classList.add('marked');
-        });
+        const row = a.parentElement;
+        const tbody = row.parentElement;
 
-        createCell('td', CountryWriters.szerzo, tr)
-        createCell('td', CountryWriters.mu1, tr)
+        const alreadyMarked = tbody.querySelector('.marked');
 
-        if (CountryWriters.szerzo2 && CountryWriters.mu2) {
-            const tr2 = document.createElement('tr');
-            tablebody.appendChild(tr2)
-            createCell('td', CountryWriters.szerzo2, tr2)
-            createCell('td', CountryWriters.mu2, tr2)
-
-            td1.rowSpan = 2;
+        if (alreadyMarked !== null) {
+            alreadyMarked.classList.remove('marked'); 
         }
+
+        a.classList.add("marked");
+    });
+
+    const td2 = createCell('td', CountryWriters.szerzo, tr2);
+
+    const td3 = createCell('td', CountryWriters.mu1, tr2);
+
+    if (CountryWriters.mu2 != undefined && CountryWriters.szerzo2 != undefined) {
+        const tr3 = document.createElement('tr');
+        tableBody.appendChild(tr3);
+
+        const td4 = createCell('td', CountryWriters.szerzo2, tr3);
+
+        const td5 = createCell('td', CountryWriters.mu2, tr3);
+
+        td1.rowSpan = 2;
+    }
 }
 
-
 /**
- * 
- * @param {string} celltype 
- * @param {string} cellcontent 
- * @param {HTMLTableCellElement} parentRow 
- * @returns 
+ * @param {'td' | 'th'} cellType 
+ * @param {string} cellContent 
+ * @param {HTMLTableRowElement} parentRow 
+ * @returns {HTMLTableCellElement}
  */
-function createCell(celltype, cellcontent, parentRow){
-    const cell = document.createElement(celltype)
-    cell.innerText = cellcontent;
-    parentRow.appendChild(cell)
+function createCell(cellType, cellContent, parentRow) {
+    const cell = document.createElement(cellType);
+    cell.innerText = cellContent;
+    parentRow.appendChild(cell);
 
     return cell;
 }
 
 
-
-function generateHeader(table, headerlist){
+/**
+ * @param {HTMLTableElement} table 
+ * @param {string[]} headerList 
+ */
+function generateHeader(table, headerList) {
     const thead = document.createElement('thead');
     table.appendChild(thead);
 
-    const tr1 = document.createElement('tr');
-    thead.appendChild(tr1);
+    const tableRow = document.createElement('tr');
+    thead.appendChild(tableRow);
 
-    for(let a of headerlist) {
+    for (const x of headerList) {
         const th = document.createElement('th');
-        tr1.appendChild(th);
-        th.innerText = a;
+        tableRow.appendChild(th);
+        th.innerText = x;
     }
 }
 
@@ -109,112 +132,154 @@ function generateHeader(table, headerlist){
 /**
  * @param {Event} e 
  */
-function htmlformEventlistener(e){
+function HTMLFormEventListener(e){
     e.preventDefault();
     /**
      * @type {HTMLFormElement}
      */
     const b = e.target;
-    
+
     /**
-     * @type {HTMLInputElemet}
+     * @type {HTMLInputElement}
      */
-       const nemzetiseg1 = b.querySelector('#nemzetiseg')
-       /**
-     * @type {HTMLInputElemet}
+    const nemzetiseg = b.querySelector('#nemzetiseg');
+
+    /**
+     * @type {HTMLInputElement}
      */
-       const szerzo1 = b.querySelector('#szerzo1')
-       /**
-     * @type {HTMLInputElemet}
+    const szerzo = b.querySelector('#szerzo');
+
+    /**
+     * @type {HTMLInputElement}
      */
-       const mu11 = b.querySelector('#mu1')
-       /**
-     * @type {HTMLInputElemet}
+    const mu1 = b.querySelector('#mu1');
+
+    /**
+     * @type {HTMLInputElement}
      */
-       const szerzo22 = b.querySelector('#szerzo2')
-       /**
-     * @type {HTMLInputElemet}
+    const szerzo2 = b.querySelector('#szerzo2');
+
+    /**
+     * @type {HTMLInputElement}
      */
-       const mu22 = b.querySelector('#mu2')
+    const mu2 = b.querySelector('#mu2');
 
-        /**
-         * @type {string}
-         */
-        const nemzet = nemzetiseg1.value
-        /**
-         * @type {string}
-         */
-        const szerez = szerzo1.value
-        /**
-         * @type {string}
-         */
-        const muu = mu11.value
-        /**
-         * @type {string}
-         */
-        const szerez2 = szerzo22.value
-        /**
-         * @type {string}
-         */
-        const muu2 = mu22.value
+    /**
+     * @type {string}
+     */
+    const natValue = nemzetiseg.value;
 
-        /**
-        * @type {{CountryWriters}}
-        */
-        const a = {
-             
-        }
-        a.nemzetiseg = nemzet
-        a.szerzo = szerez
-        a.mu1 = muu
-        a.szerzo2 = szerez2
-        a.mu2 = muu2
+    /**
+     * @type {string}
+     */
+    const authValue = szerzo.value;
 
-        const tbody = document.getElementById('tbody')
+    /**
+     * @type {string}
+     */
+    const mu1Value = mu1.value;
 
-        const tr2 = document.createElement('tr');
-        tbody.appendChild(tr2);
+    /**
+     * @type {string}
+     */
+    const auth2Value = szerzo2.value;
 
-        const td1 = document.createElement('td');
-        tr2.appendChild(td1);
-        td1.innerText = a.nemzetiseg;
-        td1.addEventListener('click', function(e){
-        /**
-         * @type {HTMLTableCellElemet}
-         */
-        const a = e.target;
-        a.classList.add('marked');
-        });
+    /**
+     * @type {string}
+     */
+    const mu2Value = mu2.value;
 
-        const td2 = document.createElement('td');
-        tr2.appendChild(td2);
-        td2.innerText = a.szerzo;
+    /**
+     * @type {CountryWriters}
+     */
+    const bah = {
+        
+    }
+    if (!validateFields(nemzetiseg, szerzo, mu1)){
+        return;
+    }
 
-        const td3 = document.createElement('td');
-        tr2.appendChild(td3);
-        td3.innerText = a.mu1;
+    bah.nemzetiseg = natValue;
+    bah.szerzo = authValue;
+    bah.mu1 = mu1Value;
 
-        if (a.mu2 && a.szerzo2) {
-            const tr3 = document.createElement('tr');
-            tbody.appendChild(tr3);
-
-            const td4 = document.createElement('td');
-            tr3.appendChild(td4);
-            td4.innerText = a.szerzo2;
-
-            const td5 = document.createElement('td');
-            tr3.appendChild(td5);
-            td5.innerText = a.mu2;
-
-            td1.rowSpan = 2;
-        }
+    if (auth2Value && mu2Value){
+        bah.szerzo2 = auth2Value;
+        bah.mu2 = mu2Value;
+    }
+    
+    const tbody = document.getElementById('tablebody');
+    renderTableRow(tbody, bah);
 }
 
 
-function validateFields(inputfield1, inputfield2, inputfield3){
+/**
+ * @param {HTMLInputElement} inputfield1 
+ * @param {HTMLInputElement} inputfield2 
+ * @param {HTMLInputElement} inputfield3 
+ * @returns {boolean}
+ */
+function validateFields(inputfield1, inputfield2, inputfield3) {
+    const form = inputfield1.form;
+
+    const errors = form.querySelectorAll(".error");
+    
+    for (const hiba of errors) {
+        hiba.innerText = "";
+    }
+
     let valid = true;
 
-    if(inputfield1.value == ""){
-        
+    if (inputfield1.value == ""){
+        const parentDiv = inputfield1.parentElement;
+        const r = parentDiv.querySelector(".error");
+        r.innerText = "Mező kitöltése kötelező!"
+
+        valid = false;
     }
-} 
+
+    if (validateField(inputfield2, "Mező kitöltése kötelező!") == false) {
+        valid = false
+    }
+
+    if (validateField(inputfield3, "Mező kitöltése kötelező!") == false) {
+        valid = false
+    }
+
+    return valid;
+}
+
+
+/**
+ * @param {string[]} headerList 
+ * @param {string} tbodyId 
+ */
+function generateTable(headerList, tbodyId) {
+    const table = document.createElement('table');
+    document.body.appendChild(table);
+
+    generateHeader(table, headerList);
+
+    const tbody = document.createElement('tbody');
+    tbody.id = tbodyId;
+    table.appendChild(tbody);
+}
+
+
+/**
+ * @param {HTMLInputElement} htmlInputField 
+ * @param {string} errorMessage 
+ * @returns {boolean}
+ */
+function validateField(htmlInputField, errorMessage) {
+    valid = true;
+
+    if (htmlInputField.value == ""){
+        const div = htmlInputField.parentElement;
+        const message = div.querySelector('.error');
+        message.innerText = errorMessage;
+        valid = false;
+    }
+
+    return valid;
+}
